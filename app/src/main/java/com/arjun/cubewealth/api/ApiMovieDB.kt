@@ -12,7 +12,7 @@ import retrofit2.http.Query
 
 // An API interface which is used to fetch details
 // from the API using the GET request
-interface MovieDBApi {
+interface ApiMovieDB {
     // GET API call to fetch now playing movies
     @GET("now_playing")
     suspend fun getNowPlayingMovies(

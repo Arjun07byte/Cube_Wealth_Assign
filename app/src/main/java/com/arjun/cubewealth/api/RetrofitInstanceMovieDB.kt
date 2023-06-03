@@ -6,9 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 // Creating a Retrofit Instance which will be
 // used to create an instance using the Retrofit Builder
-// and the OkHttp Interceptor, MovieDBApi Interface is used here
+// and the OkHttp Interceptor, ApiMovieDB Interface is used here
 // to make the API calls available to us
-class MovieDBRetrofitInstance {
+class RetrofitInstanceMovieDB {
     companion object {
         private val retrofitInstance by lazy {
             val loggingInterceptor = HttpLoggingInterceptor()
@@ -26,7 +26,7 @@ class MovieDBRetrofitInstance {
         }
 
         val movieDBApiVar by lazy {
-            retrofitInstance.create(MovieDBApi::class.java)
+            retrofitInstance.create(ApiMovieDB::class.java)
         }
     }
 }

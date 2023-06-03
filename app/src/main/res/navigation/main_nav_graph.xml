@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/exploreFragment">
+
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.arjun.cubewealth.fragments.ExploreFragment"
+        android:label="fragment_explore"
+        tools:layout="@layout/fragment_explore" >
+        <action
+            android:id="@+id/action_exploreFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/movieDetailActivity"
+        android:name="com.arjun.cubewealth.activities.MovieDetailActivity"
+        android:label="activity_movie_detail"
+        tools:layout="@layout/activity_movie_detail" />
+    <fragment
+        android:id="@+id/bookmarksFragment"
+        android:name="com.arjun.cubewealth.fragments.BookmarksFragment"
+        android:label="fragment_bookmarks"
+        tools:layout="@layout/fragment_bookmarks" >
+        <action
+            android:id="@+id/action_bookmarksFragment_to_movieDetailActivity"
+            app:destination="@id/movieDetailActivity" />
+    </fragment>
+</navigation>
