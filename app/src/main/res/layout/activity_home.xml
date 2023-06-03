@@ -23,12 +23,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bg_bottom_nav"
-        android:elevation="5dp"
+        app:backgroundTint="@android:color/transparent"
         app:itemIconSize="24dp"
+        app:elevation="5dp"
         app:itemTextColor="@color/color_item_selector"
         app:itemIconTint="@color/color_item_selector"
-        app:labelVisibilityMode="auto"
-        app:itemRippleColor="@android:color/transparent"
+        app:itemRippleColor="@color/material3White"
         app:menu="@menu/main_activity_bottom_nav_menu" />
 
 </RelativeLayout>
