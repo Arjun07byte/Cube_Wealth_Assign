@@ -11,13 +11,14 @@ import com.arjun.cubewealth.viewModel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
+    lateinit var myViewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
         // Initializing the MainViewModel using the Repository and
         // Movie ROOM Database as its parameters
-        val myViewModel = MainViewModel(MainRepository(DatabaseBookmarkMovies(this)))
+        myViewModel = MainViewModel(MainRepository(DatabaseBookmarkMovies(this)))
 
         // Establishing the Bottom Navigation View using the Android
         // Navigation Component Library

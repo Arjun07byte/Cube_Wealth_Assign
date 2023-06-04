@@ -27,4 +27,7 @@ interface DAOBookmarkMovies {
     // bookmarked movies
     @Query("SELECT * from MoviesTable")
     fun getAllBookmarkedMovies(): LiveData<List<ItemEachBookmarkMovie>>
+
+    @Query("SELECT movie_id from MoviesTable")
+    fun getAllBookmarkedMovieIds(): LiveData<List<Int>>
 }

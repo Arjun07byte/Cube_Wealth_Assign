@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.BookmarksFragment">
+    tools:context=".fragments.BookmarksFragment"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
+        android:id="@+id/textView_heading_bookmarksFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="BOOKMARKS FRAGMENT"/>
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/txt_your_bookmarks"
+        android:textColor="@color/black100"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:textSize="18sp"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_moviesRV_bookmarksFrag"
+        tools:listitem="@layout/layout_now_playing_item"
+        android:layout_below="@id/textView_heading_bookmarksFragment"
+        android:layout_width="match_parent"
+        android:layout_marginTop="24dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/textView_noBookmarks_bookmarsFrag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black50"
+        android:text="@string/txt_you_haven_t_n_bookmarked_anything"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        app:drawableTopCompat="@drawable/ic_no_bookmarks" />
+
+</RelativeLayout>

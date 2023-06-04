@@ -9,7 +9,7 @@ import com.arjun.cubewealth.localDatabase.DatabaseBookmarkMovies
 class MainRepository(
     private val dbInstance: DatabaseBookmarkMovies
 ) {
-    suspend fun getNowPlayingMovies() = RetrofitInstanceMovieDB.movieDBApiVar.getNowPlayingMovies()
+    suspend fun getNowPlayingMovies(pageIdx: Int) = RetrofitInstanceMovieDB.movieDBApiVar.getNowPlayingMovies(page = pageIdx)
     suspend fun getMovieSynopsis(movieId: Int) =
         RetrofitInstanceMovieDB.movieDBApiVar.getMovieSynopsis(movieId)
 
@@ -29,4 +29,6 @@ class MainRepository(
         dbInstance.getBookmarkMoviesDAO().removeBookmarkedMovie(givenMovie)
 
     fun getAllBookmarkedMovies() = dbInstance.getBookmarkMoviesDAO().getAllBookmarkedMovies()
+
+    fun getAllBookmarkedMovieIds() = dbInstance.getBookmarkMoviesDAO().getAllBookmarkedMovieIds()
 }

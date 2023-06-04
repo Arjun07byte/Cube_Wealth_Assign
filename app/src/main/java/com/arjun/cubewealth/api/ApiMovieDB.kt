@@ -17,7 +17,9 @@ interface ApiMovieDB {
     @GET("now_playing")
     suspend fun getNowPlayingMovies(
         @Query("api_key")
-        apiKey: String = "3f849d7343479bde4f749c60281a0496"
+        apiKey: String = "3f849d7343479bde4f749c60281a0496",
+        @Query("page")
+        page: Int
     ): Response<MoviesNowPlayingResponse>
 
     // GET API call to fetch movie synopsis by movieId
