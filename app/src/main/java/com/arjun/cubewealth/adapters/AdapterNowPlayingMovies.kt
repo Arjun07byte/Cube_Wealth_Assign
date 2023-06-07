@@ -70,13 +70,17 @@ class AdapterNowPlayingMovies(private val exploreFragmentRVClickListener: Explor
         holder.apply {
             Glide.with(imageViewEachNowPlayingMovie)
                 .load(MovieDBPathToImageLink.convertPathToImage(posData.backdrop_path))
+                .placeholder(R.drawable.ic_progress)
                 .into(imageViewEachNowPlayingMovie)
 
             tvTitleBookEachNowPlayingMovie.text = posData.title
             tvReleaseDateBookEachNowPlayingMovie.text =
                 this.itemView.context.getString(R.string.txt_release_date, posData.release_date)
 
-            if (exploreFragmentRVClickListener.getBookmarkedStatus(posData.id)) {
+            // fetching whether the given movie is inside the bookmarks
+            // list and handling the button clicks according to that
+            var isBookmarked = exploreFragmentRVClickListener.getBookmarkedStatus(posData.id)
+            if (isBookmarked) {
                 buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmarked_button)
                 buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmarked)
                 buttonBookmarkEachNowPlayingMovie.setOnClickListener {}
@@ -86,7 +90,12 @@ class AdapterNowPlayingMovies(private val exploreFragmentRVClickListener: Explor
                     buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmarked_button)
                     buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmarked)
                     buttonBookmarkEachNowPlayingMovie.setOnClickListener {}
+                    isBookmarked = true
                 }
+            }
+
+            buttonBookEachNowPlayingMovie.setOnClickListener {
+                exploreFragmentRVClickListener.moveToMovieDetailsActivity(posData.id, posData.title, isBookmarked)
             }
         }
     }

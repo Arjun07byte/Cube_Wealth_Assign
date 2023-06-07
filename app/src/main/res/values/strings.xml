@@ -5,6 +5,10 @@
     <string name="cd_filter_movie_list">Filter Movie List</string>
     <string name="cd_movie_image">Movie Image</string>
     <string name="txt_release_date">Release : %1s</string>
+    <string name="txt_genre_text">%1s | %2s | %3s</string>
+    <string name="txt_rating_text">%1s / 10</string>
     <string name="txt_your_bookmarks">Your Bookmarks</string>
     <string name="txt_you_haven_t_n_bookmarked_anything">You haven’t \n Bookmarked Anything</string>
+    <string name="txt_default">Default</string>
+    <string name="txt_release_date_sort">Release Date</string>
 </resources>

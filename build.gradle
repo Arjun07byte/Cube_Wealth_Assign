@@ -1,4 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    dependencies {
+        // Dependency to add the Navigation Safe Args Library
+        // for handling Safe Transition of elements between fragment and activity
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.5.3")
+    }
+}
+
 plugins {
     id 'com.android.application' version '8.0.1' apply false
     id 'com.android.library' version '8.0.1' apply false

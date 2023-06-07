@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arjun.cubewealth.R
@@ -58,6 +59,15 @@ class BookmarksFragment : Fragment() {
     inner class BookmarkFragmentRVClickListener {
         fun removeBookmarkedMovie(givenMovieItem: ItemEachBookmarkMovie) {
             myViewModel.removeBookmarkedMovie(givenMovieItem)
+        }
+
+        fun moveToMovieDetailsActivity(movie_id: Int, movie_name: String?, is_bookmarked: Boolean) {
+            val action = BookmarksFragmentDirections.actionBookmarksFragmentToMovieDetailActivity(
+                movie_id,
+                movieName = movie_name,
+                isBookmarked = is_bookmarked
+            )
+            findNavController().navigate(action)
         }
     }
 }

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ProgressBar
+import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arjun.cubewealth.R
@@ -14,6 +17,7 @@ import com.arjun.cubewealth.adapters.AdapterNowPlayingMovies
 import com.arjun.cubewealth.dataModels.ItemEachBookmarkMovie
 import com.arjun.cubewealth.utills.APIResponseStateClass
 import com.arjun.cubewealth.viewModel.MainViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class ExploreFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
@@ -33,6 +37,18 @@ class ExploreFragment : Fragment() {
         val rv: RecyclerView = view.findViewById(R.id.recyclerView_moviesRV_exploreFrag)
         val adapterIns = AdapterNowPlayingMovies(ExploreFragmentRVClickListener())
         val progressBar: ProgressBar = view.findViewById(R.id.progressBar_exploreFragment)
+        val sortButton: ImageButton = view.findViewById(R.id.button_sortMovies_exploreFrag)
+        val alertDialog = BottomSheetDialog(this.requireContext())
+        alertDialog.setContentView(R.layout.layout_sorting_dialog)
+        val alertDialogRadioGroup: RadioGroup? =
+            alertDialog.findViewById(R.id.radioGroup_sortDialog)
+
+        // When user has changed the selection of the radio button
+        // then we will again call for the nowPlaying movies
+        sortButton.setOnClickListener { alertDialog.show() }
+        alertDialogRadioGroup?.setOnCheckedChangeListener { group, checkedId ->
+            alertDialog.dismiss(); mainViewModel.getNowPlayingMovies(1)
+        }
 
         rv.apply {
             adapter = adapterIns; layoutManager = LinearLayoutManager(this@ExploreFragment.context)
@@ -50,7 +66,29 @@ class ExploreFragment : Fragment() {
                     progressBar.visibility = View.GONE
                     rv.visibility = View.VISIBLE
 
-                    adapterIns.differList.submitList(it.successResponseData!!.results)
+                    // Checking the current choice of the user and
+                    // sorting the fetched movie list accordingly
+                    when (alertDialogRadioGroup?.checkedRadioButtonId) {
+                        R.id.radioButton_default_sortDialog -> {
+                            adapterIns.differList.submitList(it.successResponseData!!.results)
+                            rv.smoothScrollToPosition(0)
+                        }
+                        R.id.radioButton_releaseDown_sortDialog -> {
+                            adapterIns.differList.submitList(
+                                it.successResponseData!!.results.sortedBy { eachMovie ->
+                                    eachMovie.release_date
+                                })
+                            rv.smoothScrollToPosition(0)
+                        }
+
+                        R.id.radioButton_releaseUp_sortDialog -> {
+                            adapterIns.differList.submitList(it.successResponseData!!.results.sortedByDescending { eachMovie ->
+                                eachMovie.release_date
+                            })
+
+                            rv.smoothScrollToPosition(0)
+                        }
+                    }
                 }
 
                 else -> {
@@ -68,6 +106,15 @@ class ExploreFragment : Fragment() {
     inner class ExploreFragmentRVClickListener {
         fun bookmarkMovie(givenMovieItem: ItemEachBookmarkMovie) {
             mainViewModel.bookmarkMovie(givenMovieItem)
+        }
+
+        fun moveToMovieDetailsActivity(movie_id: Int, movie_name: String?, is_bookmarked: Boolean) {
+            val action = ExploreFragmentDirections.actionExploreFragmentToMovieDetailActivity(
+                movie_id,
+                movieName = movie_name,
+                isBookmarked = is_bookmarked
+            )
+            findNavController().navigate(action)
         }
 
         fun getBookmarkedStatus(givenMovieId: Int): Boolean {

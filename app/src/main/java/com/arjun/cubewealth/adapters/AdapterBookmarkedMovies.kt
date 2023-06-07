@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide
 
 class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: BookmarksFragment.BookmarkFragmentRVClickListener) :
     RecyclerView.Adapter<AdapterBookmarkedMovies.ViewHolderNowPlayingMovies>() {
+    // Viewholder will have the reference to all the variables inside a single
+    // recyclerview item
     inner class ViewHolderNowPlayingMovies(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewEachBookmarkMovie: ImageView =
             itemView.findViewById(R.id.imageView_eachBookmarkItem)
@@ -31,7 +33,11 @@ class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: Bookm
             itemView.findViewById(R.id.textView_rDate_eachBookmarkMovie)
     }
 
-    val diffUtilCallback = object : DiffUtil.ItemCallback<ItemEachBookmarkMovie>() {
+    // Diff util library class is being used to update the
+    // data inside the recyclerview async.
+    private val diffUtilCallback = object : DiffUtil.ItemCallback<ItemEachBookmarkMovie>() {
+        // Callback function of diff util defines how each RV item is being
+        // differentiated from the other using these two callbacks
         override fun areItemsTheSame(
             oldItem: ItemEachBookmarkMovie,
             newItem: ItemEachBookmarkMovie
@@ -49,6 +55,7 @@ class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: Bookm
 
     val differList = AsyncListDiffer(this, diffUtilCallback)
 
+    // Inflating the respective recycler view item layout
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNowPlayingMovies {
         return ViewHolderNowPlayingMovies(
             LayoutInflater.from(parent.context).inflate(
@@ -67,16 +74,26 @@ class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: Bookm
         val posData = differList.currentList[position]
 
         holder.apply {
+            // Loading and displaying the movie Backdrop image using the
+            // Glide Library
             Glide.with(imageViewEachBookmarkMovie)
                 .load(MovieDBPathToImageLink.convertPathToImage(posData.backdropPicPath))
+                .placeholder(R.drawable.ic_progress)
                 .into(imageViewEachBookmarkMovie)
 
             tvTitleBookEachBookmarkMovie.text = posData.movie_title
             tvReleaseDateBookEachBookmarkMovie.text =
                 this.itemView.context.getString(R.string.txt_release_date, posData.release_date)
 
+            // Respective book and bookmark button are being updated to
+            // handle operations using a Class Obj reference from the
+            // fragment/Activity class
             buttonRemoveBookmarkEachBookmarkMovie.setOnClickListener {
                 bookmarkFragmentRVClickListener.removeBookmarkedMovie(posData)
+            }
+
+            buttonBookEachBookmarkMovie.setOnClickListener {
+                bookmarkFragmentRVClickListener.moveToMovieDetailsActivity(posData.movie_id, posData.movie_title,true)
             }
         }
     }
