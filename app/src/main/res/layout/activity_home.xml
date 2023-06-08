@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Activity Home Screen Layout containing the
+    Fragment Container View which will be used to
+    inflate the different fragments which will be used
+    to display the explore and bookmark fragments
+    and a Bottom Navigation Bar to switch between
+    these two fragments
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -22,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bg_bottom_nav"
         app:backgroundTint="@android:color/transparent"
         app:itemIconSize="24dp"
         app:elevation="5dp"

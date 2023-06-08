@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Navigation res file which will be used to setup the
+    nav graph for the fragment container view in accordance
+    with the Android Navigation Library which is used in the
+    project to handle the navigation between fragments and
+    activities
+-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,6 +39,16 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null"/>
+        <argument
+            android:name="releaseDate"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="backdropPath"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </activity>
     <fragment
         android:id="@+id/bookmarksFragment"

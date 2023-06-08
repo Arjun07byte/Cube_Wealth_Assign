@@ -93,7 +93,13 @@ class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: Bookm
             }
 
             buttonBookEachBookmarkMovie.setOnClickListener {
-                bookmarkFragmentRVClickListener.moveToMovieDetailsActivity(posData.movie_id, posData.movie_title,true)
+                bookmarkFragmentRVClickListener.moveToMovieDetailsActivity(
+                    posData.movie_id,
+                    posData.movie_title,
+                    true,
+                    posData.release_date,
+                    posData.backdropPicPath
+                )
             }
         }
     }

@@ -79,23 +79,36 @@ class AdapterNowPlayingMovies(private val exploreFragmentRVClickListener: Explor
 
             // fetching whether the given movie is inside the bookmarks
             // list and handling the button clicks according to that
-            var isBookmarked = exploreFragmentRVClickListener.getBookmarkedStatus(posData.id)
-            if (isBookmarked) {
-                buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmarked_button)
-                buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmarked)
-                buttonBookmarkEachNowPlayingMovie.setOnClickListener {}
-            } else {
-                buttonBookmarkEachNowPlayingMovie.setOnClickListener {
-                    exploreFragmentRVClickListener.bookmarkMovie(makeBookmarkItem(posData))
-                    buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmarked_button)
-                    buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmarked)
-                    buttonBookmarkEachNowPlayingMovie.setOnClickListener {}
-                    isBookmarked = true
-                }
-            }
+            setUpBookmarkButton(posData, holder.buttonBookmarkEachNowPlayingMovie)
 
             buttonBookEachNowPlayingMovie.setOnClickListener {
-                exploreFragmentRVClickListener.moveToMovieDetailsActivity(posData.id, posData.title, isBookmarked)
+                exploreFragmentRVClickListener.moveToMovieDetailsActivity(
+                    posData.id,
+                    posData.title,
+                    exploreFragmentRVClickListener.getBookmarkedStatus(posData.id),
+                    posData.release_date,
+                    posData.backdrop_path
+                )
+            }
+        }
+    }
+
+    private fun setUpBookmarkButton(
+        posData: ItemEachMovie,
+        buttonBookmarkEachNowPlayingMovie: ImageButton
+    ) {
+        if (exploreFragmentRVClickListener.getBookmarkedStatus(posData.id)) {
+            buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmarked_movie_button)
+            buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmarked)
+            buttonBookmarkEachNowPlayingMovie.setOnClickListener {}
+        } else {
+            buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmark_movie_button)
+            buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmark)
+            buttonBookmarkEachNowPlayingMovie.setOnClickListener {
+                exploreFragmentRVClickListener.bookmarkMovie(makeBookmarkItem(posData))
+                buttonBookmarkEachNowPlayingMovie.setBackgroundResource(R.drawable.bg_bookmarked_movie_button)
+                buttonBookmarkEachNowPlayingMovie.setImageResource(R.drawable.ic_bookmarked)
+                buttonBookmarkEachNowPlayingMovie.setOnClickListener {}
             }
         }
     }

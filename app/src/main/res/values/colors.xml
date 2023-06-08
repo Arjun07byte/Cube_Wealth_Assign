@@ -4,7 +4,14 @@
     <color name="red100">#FFFF0000</color>
     <color name="black50">#80000000</color>
     <color name="white100">#FFFFFFFF</color>
+    <color name="white50">#80FFFFFF</color>
     <color name="material3White">#FFFFFBFE</color>
     <color name="material3Black">#FF1E1E1E</color>
     <color name="royalBlue100">#FF246EE9</color>
+
+    <color name="headingTextColor">@color/black100</color>
+    <color name="buttonBgTint">@color/material3White</color>
+    <color name="buttonTint">@color/black100</color>
+    <color name="bottomNavSelected">@color/black100</color>
+    <color name="bottomNavUnSelected">@color/black50</color>
 </resources>

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Activity Movie Detail Layout which contains coordinator
+    layout as its parent, a collapsing toolbar to display the
+    app title which can be used as a great UI for the user
+    in the near future by changing the contents inside it
+
+    A nested scroll view is used to display the movie Details
+    content which can be scrolled to view the required contents
+
+    An Image button is used to perform the action to bookmark
+    the movie displayed
+-->
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -11,13 +23,13 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="@color/material3White"
+            app:contentScrim="@color/buttonBgTint"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:background="@color/material3White"
+                android:background="@color/buttonBgTint"
                 app:layout_collapseMode="pin" />
 
             <ImageButton
@@ -26,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="16dp"
-                android:background="@color/material3White"
+                android:background="@color/buttonBgTint"
                 android:src="@drawable/ic_back" />
 
             <TextView
@@ -39,15 +51,17 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:textAlignment="center"
-                android:textColor="@color/black100"
+                android:textColor="@color/headingTextColor"
                 android:textSize="18dp" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentView_activityMovieDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -84,42 +98,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Genre"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_genre"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <TextView
                     android:id="@+id/textView_genreText_movieDetailActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:textColor="@color/bottomNavSelected" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Release Date"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_release_date_sort"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <TextView
                     android:id="@+id/textView_releaseDate_movieDetailActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" />
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/bottomNavSelected" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Rating"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_rating"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <TextView
                     android:id="@+id/textView_rating_movieDetailActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:textColor="@color/bottomNavSelected" />
 
             </LinearLayout>
 
@@ -135,102 +150,122 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tagline"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_tagline"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <TextView
                     android:id="@+id/textView_taglineText_movieDetailActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:textColor="@color/bottomNavSelected" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Overview"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_overview"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <TextView
                     android:id="@+id/textView_overviewText_movieDetailActivity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:textColor="@color/bottomNavSelected" />
 
                 <TextView
+                    android:id="@+id/textView_title_movieProduction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Production Companies"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_production_companies"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_productionCompanies_movieDetailActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:layout_marginTop="4dp" />
 
                 <TextView
+                    android:id="@+id/textView_title_movieCasts"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Cast"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_cast"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_cast_movieDetailActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:layout_marginTop="4dp" />
 
                 <TextView
+                    android:id="@+id/textView_title_movieCrews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Crew"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_crew"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_crew_movieDetailActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:layout_marginTop="4dp" />
 
                 <TextView
+                    android:id="@+id/textView_title_similarMovies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Similar Movies"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_similar_movies"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_similarMovies_movieDetailActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:layout_marginTop="4dp" />
 
                 <TextView
+                    android:id="@+id/textView_title_movieReviews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Reviews"
-                    android:textColor="@color/black50" />
+                    android:text="@string/txt_reviews"
+                    android:textColor="@color/bottomNavUnSelected" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_reviews_movieDetailActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textColor="@color/black100" />
+                    android:layout_marginTop="4dp" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar_activityMovieDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/buttonTint"
+        android:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/button_addBookmark_activityMovieDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_bookmarked_movie_button"
+        android:padding="16dp"
+        android:src="@drawable/ic_bookmarked"
+        android:contentDescription="@string/cd_bookmark_button" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

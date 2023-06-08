@@ -43,10 +43,16 @@ class ExploreFragment : Fragment() {
         val alertDialogRadioGroup: RadioGroup? =
             alertDialog.findViewById(R.id.radioGroup_sortDialog)
 
+        mainViewModel.getAllBookmarkedMovieIds().observe(this.viewLifecycleOwner) {
+            mainViewModel.updateBookmarkedIdsList(it)
+        }
+
+        mainViewModel.getNowPlayingMovies(1)
+
         // When user has changed the selection of the radio button
         // then we will again call for the nowPlaying movies
         sortButton.setOnClickListener { alertDialog.show() }
-        alertDialogRadioGroup?.setOnCheckedChangeListener { group, checkedId ->
+        alertDialogRadioGroup?.setOnCheckedChangeListener { _, _ ->
             alertDialog.dismiss(); mainViewModel.getNowPlayingMovies(1)
         }
 
@@ -54,7 +60,6 @@ class ExploreFragment : Fragment() {
             adapter = adapterIns; layoutManager = LinearLayoutManager(this@ExploreFragment.context)
         }
 
-        mainViewModel.getNowPlayingMovies(1)
         mainViewModel.liveDataNowPlayingMovieList.observe(this.viewLifecycleOwner) {
             when (it) {
                 is APIResponseStateClass.LoadingResponseClass -> {
@@ -73,6 +78,7 @@ class ExploreFragment : Fragment() {
                             adapterIns.differList.submitList(it.successResponseData!!.results)
                             rv.smoothScrollToPosition(0)
                         }
+
                         R.id.radioButton_releaseDown_sortDialog -> {
                             adapterIns.differList.submitList(
                                 it.successResponseData!!.results.sortedBy { eachMovie ->
@@ -97,10 +103,6 @@ class ExploreFragment : Fragment() {
                 }
             }
         }
-
-        mainViewModel.getAllBookmarkedMovieIds().observe(this.viewLifecycleOwner) {
-            mainViewModel.updateBookmarkedIdsList(it)
-        }
     }
 
     inner class ExploreFragmentRVClickListener {
@@ -108,11 +110,15 @@ class ExploreFragment : Fragment() {
             mainViewModel.bookmarkMovie(givenMovieItem)
         }
 
-        fun moveToMovieDetailsActivity(movie_id: Int, movie_name: String?, is_bookmarked: Boolean) {
+        fun moveToMovieDetailsActivity(
+            movie_id: Int,
+            movie_name: String?,
+            is_bookmarked: Boolean,
+            releaseDate: String?,
+            backdropPath: String?
+        ) {
             val action = ExploreFragmentDirections.actionExploreFragmentToMovieDetailActivity(
-                movie_id,
-                movieName = movie_name,
-                isBookmarked = is_bookmarked
+                movie_id, is_bookmarked, movie_name, releaseDate, backdropPath
             )
             findNavController().navigate(action)
         }

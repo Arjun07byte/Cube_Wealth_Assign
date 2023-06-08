@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Menu Resource File which is used to display the
+    choices for the bottomNavigation Bar
+-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/exploreFragment"
@@ -8,5 +12,5 @@
     <item
         android:id="@+id/bookmarksFragment"
         android:title="@string/txt_bookmarks"
-        android:icon="@drawable/ic_bookmark"/>
+        android:icon="@drawable/ic_bookmark_bottom_nav"/>
 </menu>

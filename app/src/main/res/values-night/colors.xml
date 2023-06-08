@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="headingTextColor">@color/white100</color>
+    <color name="buttonBgTint">@color/material3Black</color>
+    <color name="buttonTint">@color/white100</color>
+    <color name="bottomNavSelected">@color/white100</color>
+    <color name="bottomNavUnSelected">@color/white50</color>
+</resources>

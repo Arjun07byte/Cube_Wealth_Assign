@@ -31,7 +31,7 @@ class MainViewModel(
         MutableLiveData()
     val liveDataMovieReviewsList: MutableLiveData<APIResponseStateClass<DisplayMovieReview>> =
         MutableLiveData()
-    var listBookmarkedMoviesIds: List<Int> = listOf()
+    var listBookmarkedMoviesIds: MutableSet<Int> = mutableSetOf()
 
     fun getNowPlayingMovies(pageIdx: Int) {
         viewModelScope.launch {
@@ -171,13 +171,18 @@ class MainViewModel(
     private fun getDisplayMovieReview(givenResponse: MoviesReviewResponse): DisplayMovieReview {
         return DisplayMovieReview(
             buildList {
-                givenResponse.results.mapTo(this) { ItemMovieReviewDisplay(it.author, it.content.trim()) }
+                givenResponse.results.mapTo(this) {
+                    ItemMovieReviewDisplay(
+                        it.author,
+                        it.content.trim()
+                    )
+                }
             }
         )
     }
 
     fun updateBookmarkedIdsList(givenList: List<Int>) {
-        listBookmarkedMoviesIds = givenList
+        listBookmarkedMoviesIds.addAll(givenList)
     }
 
     fun bookmarkMovie(givenMovie: ItemEachBookmarkMovie) {

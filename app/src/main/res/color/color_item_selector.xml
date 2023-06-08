@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Color Resource File which will be used by app Bottom
+    Navigation Bar to show the current selected and the
+    unselected buttons/options/fragments
+
+    The Resource file is fully Dark/Light Theme supported
+-->
+
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/black100" android:state_pressed="true"/>
-    <item android:color="@color/black100" android:state_checked="true"/>
-    <item android:color="@color/black50"/>
+    <item android:color="@color/bottomNavSelected" android:state_pressed="true"/>
+    <item android:color="@color/bottomNavSelected" android:state_checked="true"/>
+    <item android:color="@color/bottomNavUnSelected"/>
 </selector>

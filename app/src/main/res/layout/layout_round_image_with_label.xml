@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout with Round Image and a label text below it
+
+    Layout is used to display the items of the
+    recycler view displayed in the movieDetail Activity
+    and is used to display the details of crew and cast of
+    the movies
+-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
@@ -20,6 +28,7 @@
     <TextView
         android:id="@+id/textView_labelText_creditImageLayout"
         android:layout_width="match_parent"
+        android:textColor="@color/headingTextColor"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textAlignment="center" />

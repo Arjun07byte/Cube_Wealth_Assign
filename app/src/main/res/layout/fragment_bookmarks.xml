@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Bookmarks Fragment Layout
+
+    Relative Layout as the parent viewGroup
+    It contains a recyclerview to display the bookmarked
+    movies which user has bookmarked and are stored in ROOM
+    database, The layout also has an indicator to display
+    whether the list of user bookmarks are empty or not
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:text="@string/txt_your_bookmarks"
-        android:textColor="@color/black100"
+        android:textColor="@color/headingTextColor"
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:textSize="18sp"/>
@@ -34,10 +43,10 @@
         android:id="@+id/textView_noBookmarks_bookmarsFrag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black50"
-        android:text="@string/txt_you_haven_t_n_bookmarked_anything"
         android:layout_centerInParent="true"
+        android:text="@string/txt_you_haven_t_n_bookmarked_anything"
         android:textAlignment="center"
+        android:textColor="@color/bottomNavUnSelected"
         app:drawableTopCompat="@drawable/ic_no_bookmarks" />
 
 </RelativeLayout>

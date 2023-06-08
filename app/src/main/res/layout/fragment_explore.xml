@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Explore Fragment Layout
+
+    Relative Layout as the parent viewGroup
+    It contains a recyclerview to display the now Playing
+    movies fetched from MovieDB API using Retrofit
+
+    Sort Button is used to inflate a bottom sheet which will
+    be used by the user to select the filter parameter
+    to sort the now playing movies list
+
+    The layout also has a progress indicator to let user
+    display the data is being fetched
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,7 +23,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="center"
-        android:textColor="@color/black100"
+        android:textColor="@color/headingTextColor"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="Now Playing"
@@ -23,7 +37,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@color/material3White"
+        android:background="@color/buttonBgTint"
         android:contentDescription="@string/cd_filter_movie_list"
         android:src="@drawable/ic_sort" />
 
@@ -32,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:indeterminateTint="@color/black100" />
+        android:indeterminateTint="@color/headingTextColor" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_moviesRV_exploreFrag"

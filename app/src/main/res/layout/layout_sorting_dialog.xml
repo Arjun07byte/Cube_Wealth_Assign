@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout used for bottomSheet Dialog which is used to
+    display the available filter selection for the user
+    to filter the nowPlaying Movies list
+-->
 <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/radioGroup_sortDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material3White"
+    android:background="@color/buttonBgTint"
     android:checkedButton="@id/radioButton_default_sortDialog"
     android:padding="16dp">
 
@@ -11,11 +16,13 @@
         android:id="@+id/radioButton_default_sortDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/headingTextColor"
         android:text="@string/txt_default" />
 
     <RadioButton
         android:id="@+id/radioButton_releaseDown_sortDialog"
         android:layout_width="wrap_content"
+        android:textColor="@color/headingTextColor"
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/ic_arrow_down"
         android:drawablePadding="5dp"
@@ -26,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableEnd="@drawable/ic_arrow_up"
+        android:textColor="@color/headingTextColor"
         android:drawablePadding="5dp"
         android:text="@string/txt_release_date_sort" />
 

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Layout of Movie Review items
+
+    Layout is used to display the items of the
+    recycler view displayed in the movieDetail Activity
+    which contains the review done by the users
+-->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -12,7 +20,7 @@
         android:ellipsize="end"
         android:maxLength="26"
         android:maxLines="1"
-        android:textColor="@color/black50" />
+        android:textColor="@color/bottomNavUnSelected" />
 
     <TextView
         android:id="@+id/textView_content_reviewItem"
@@ -21,6 +29,6 @@
         android:layout_marginTop="4dp"
         android:ellipsize="end"
         android:maxLength="250"
-        android:textColor="@color/black100" />
+        android:textColor="@color/headingTextColor" />
 </LinearLayout>
 

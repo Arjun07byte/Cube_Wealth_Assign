@@ -61,11 +61,15 @@ class BookmarksFragment : Fragment() {
             myViewModel.removeBookmarkedMovie(givenMovieItem)
         }
 
-        fun moveToMovieDetailsActivity(movie_id: Int, movie_name: String?, is_bookmarked: Boolean) {
+        fun moveToMovieDetailsActivity(
+            movie_id: Int,
+            movie_name: String?,
+            is_bookmarked: Boolean,
+            releaseDate: String?,
+            backdropPath: String?
+        ) {
             val action = BookmarksFragmentDirections.actionBookmarksFragmentToMovieDetailActivity(
-                movie_id,
-                movieName = movie_name,
-                isBookmarked = is_bookmarked
+                movie_id, is_bookmarked, movie_name, releaseDate, backdropPath
             )
             findNavController().navigate(action)
         }

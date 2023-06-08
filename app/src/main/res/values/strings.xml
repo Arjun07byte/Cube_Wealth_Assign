@@ -11,4 +11,15 @@
     <string name="txt_you_haven_t_n_bookmarked_anything">You haven’t \n Bookmarked Anything</string>
     <string name="txt_default">Default</string>
     <string name="txt_release_date_sort">Release Date</string>
+    <string name="txt_reviews">Reviews</string>
+    <string name="txt_similar_movies">Similar Movies</string>
+    <string name="txt_crew">Crew</string>
+    <string name="txt_cast">Cast</string>
+    <string name="txt_production_companies">Production Companies</string>
+    <string name="txt_overview">Overview</string>
+    <string name="txt_tagline">Tagline</string>
+    <string name="txt_rating">Rating</string>
+    <string name="txt_genre">Genre</string>
+    <string name="txt_book">BOOK</string>
+    <string name="cd_bookmark_button">Bookmark Button</string>
 </resources>
