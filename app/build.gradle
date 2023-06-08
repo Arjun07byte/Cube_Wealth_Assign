@@ -64,4 +64,8 @@ dependencies {
     implementation "androidx.room:room-runtime:2.6.0-alpha01"
     kapt "androidx.room:room-compiler:2.6.0-alpha01"
     implementation "androidx.room:room-ktx:2.6.0-alpha01"
+
+    // Dependencies for Paging3 Library which will
+    // be used for pagination of the Data fetched from the API
+    implementation("androidx.paging:paging-runtime:3.1.1")
 }

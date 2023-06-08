@@ -15,7 +15,7 @@ import com.arjun.cubewealth.R
 import com.arjun.cubewealth.activities.HomeActivity
 import com.arjun.cubewealth.adapters.AdapterNowPlayingMovies
 import com.arjun.cubewealth.dataModels.ItemEachBookmarkMovie
-import com.arjun.cubewealth.utills.APIResponseStateClass
+import com.arjun.cubewealth.paging.NowPlayingMovieLoadStateAdapter
 import com.arjun.cubewealth.viewModel.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
@@ -46,62 +46,19 @@ class ExploreFragment : Fragment() {
         mainViewModel.getAllBookmarkedMovieIds().observe(this.viewLifecycleOwner) {
             mainViewModel.updateBookmarkedIdsList(it)
         }
-
-        mainViewModel.getNowPlayingMovies(1)
-
-        // When user has changed the selection of the radio button
-        // then we will again call for the nowPlaying movies
-        sortButton.setOnClickListener { alertDialog.show() }
-        alertDialogRadioGroup?.setOnCheckedChangeListener { _, _ ->
-            alertDialog.dismiss(); mainViewModel.getNowPlayingMovies(1)
-        }
+        sortButton.visibility = View.INVISIBLE
 
         rv.apply {
-            adapter = adapterIns; layoutManager = LinearLayoutManager(this@ExploreFragment.context)
+            adapter = adapterIns.withLoadStateHeaderAndFooter(
+                NowPlayingMovieLoadStateAdapter(),
+                NowPlayingMovieLoadStateAdapter()
+            )
+            layoutManager = LinearLayoutManager(this@ExploreFragment.context)
         }
 
-        mainViewModel.liveDataNowPlayingMovieList.observe(this.viewLifecycleOwner) {
-            when (it) {
-                is APIResponseStateClass.LoadingResponseClass -> {
-                    progressBar.visibility = View.VISIBLE
-                    rv.visibility = View.GONE
-                }
-
-                is APIResponseStateClass.SuccessResponseClass -> {
-                    progressBar.visibility = View.GONE
-                    rv.visibility = View.VISIBLE
-
-                    // Checking the current choice of the user and
-                    // sorting the fetched movie list accordingly
-                    when (alertDialogRadioGroup?.checkedRadioButtonId) {
-                        R.id.radioButton_default_sortDialog -> {
-                            adapterIns.differList.submitList(it.successResponseData!!.results)
-                            rv.smoothScrollToPosition(0)
-                        }
-
-                        R.id.radioButton_releaseDown_sortDialog -> {
-                            adapterIns.differList.submitList(
-                                it.successResponseData!!.results.sortedBy { eachMovie ->
-                                    eachMovie.release_date
-                                })
-                            rv.smoothScrollToPosition(0)
-                        }
-
-                        R.id.radioButton_releaseUp_sortDialog -> {
-                            adapterIns.differList.submitList(it.successResponseData!!.results.sortedByDescending { eachMovie ->
-                                eachMovie.release_date
-                            })
-
-                            rv.smoothScrollToPosition(0)
-                        }
-                    }
-                }
-
-                else -> {
-                    progressBar.visibility = View.VISIBLE
-                    rv.visibility = View.GONE
-                }
-            }
+        mainViewModel.getNowPlayingMovies().observe(this.viewLifecycleOwner) {
+            progressBar.visibility = View.GONE; rv.visibility = View.VISIBLE
+            adapterIns.submitData(this.lifecycle, it)
         }
     }
 

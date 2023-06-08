@@ -1,15 +1,24 @@
 package com.arjun.cubewealth.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.arjun.cubewealth.api.RetrofitInstanceMovieDB
 import com.arjun.cubewealth.dataModels.ItemEachBookmarkMovie
 import com.arjun.cubewealth.localDatabase.DatabaseBookmarkMovies
+import com.arjun.cubewealth.paging.NowPlayingPagingSource
 
 // Main Repository having access to data fetched from both
 // the offline and the online modes
 class MainRepository(
     private val dbInstance: DatabaseBookmarkMovies
 ) {
-    suspend fun getNowPlayingMovies(pageIdx: Int) = RetrofitInstanceMovieDB.movieDBApiVar.getNowPlayingMovies(page = pageIdx)
+    fun getNowPlayingMovies() = Pager(
+        config = PagingConfig(20, 40)
+    ) {
+        NowPlayingPagingSource(RetrofitInstanceMovieDB.movieDBApiVar)
+    }.liveData
+
     suspend fun getMovieSynopsis(movieId: Int) =
         RetrofitInstanceMovieDB.movieDBApiVar.getMovieSynopsis(movieId)
 

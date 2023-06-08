@@ -17,10 +17,10 @@ import com.arjun.cubewealth.utills.MovieDBPathToImageLink
 import com.bumptech.glide.Glide
 
 class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: BookmarksFragment.BookmarkFragmentRVClickListener) :
-    RecyclerView.Adapter<AdapterBookmarkedMovies.ViewHolderNowPlayingMovies>() {
+    RecyclerView.Adapter<AdapterBookmarkedMovies.ViewHolderBookmarkedMovies>() {
     // Viewholder will have the reference to all the variables inside a single
     // recyclerview item
-    inner class ViewHolderNowPlayingMovies(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolderBookmarkedMovies(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewEachBookmarkMovie: ImageView =
             itemView.findViewById(R.id.imageView_eachBookmarkItem)
         val buttonBookEachBookmarkMovie: Button =
@@ -56,8 +56,8 @@ class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: Bookm
     val differList = AsyncListDiffer(this, diffUtilCallback)
 
     // Inflating the respective recycler view item layout
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNowPlayingMovies {
-        return ViewHolderNowPlayingMovies(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderBookmarkedMovies {
+        return ViewHolderBookmarkedMovies(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.layout_bookmarks_item,
                 parent,
@@ -70,7 +70,7 @@ class AdapterBookmarkedMovies(private val bookmarkFragmentRVClickListener: Bookm
         return differList.currentList.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolderNowPlayingMovies, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderBookmarkedMovies, position: Int) {
         val posData = differList.currentList[position]
 
         holder.apply {

@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.arjun.cubewealth.R
@@ -18,7 +18,9 @@ import com.arjun.cubewealth.utills.MovieDBPathToImageLink
 import com.bumptech.glide.Glide
 
 class AdapterNowPlayingMovies(private val exploreFragmentRVClickListener: ExploreFragment.ExploreFragmentRVClickListener) :
-    RecyclerView.Adapter<AdapterNowPlayingMovies.ViewHolderNowPlayingMovies>() {
+    PagingDataAdapter<ItemEachMovie, AdapterNowPlayingMovies.ViewHolderNowPlayingMovies>(
+        diffUtilCallback
+    ) {
     inner class ViewHolderNowPlayingMovies(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageViewEachNowPlayingMovie: ImageView =
             itemView.findViewById(R.id.imageView_eachNowPlayingItem)
@@ -30,25 +32,27 @@ class AdapterNowPlayingMovies(private val exploreFragmentRVClickListener: Explor
             itemView.findViewById(R.id.textView_title_eachNowPlayingMovie)
         val tvReleaseDateBookEachNowPlayingMovie: TextView =
             itemView.findViewById(R.id.textView_rDate_eachNowPlayingMovie)
+
+
     }
 
-    private val diffUtilCallback = object : DiffUtil.ItemCallback<ItemEachMovie>() {
-        override fun areItemsTheSame(
-            oldItem: ItemEachMovie,
-            newItem: ItemEachMovie
-        ): Boolean {
-            return oldItem.id == newItem.id
-        }
+    companion object {
+        private val diffUtilCallback = object : DiffUtil.ItemCallback<ItemEachMovie>() {
+            override fun areItemsTheSame(
+                oldItem: ItemEachMovie,
+                newItem: ItemEachMovie
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-        override fun areContentsTheSame(
-            oldItem: ItemEachMovie,
-            newItem: ItemEachMovie
-        ): Boolean {
-            return oldItem.title == newItem.title
+            override fun areContentsTheSame(
+                oldItem: ItemEachMovie,
+                newItem: ItemEachMovie
+            ): Boolean {
+                return oldItem.title == newItem.title
+            }
         }
     }
-
-    val differList = AsyncListDiffer(this, diffUtilCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderNowPlayingMovies {
         return ViewHolderNowPlayingMovies(
@@ -60,35 +64,33 @@ class AdapterNowPlayingMovies(private val exploreFragmentRVClickListener: Explor
         )
     }
 
-    override fun getItemCount(): Int {
-        return differList.currentList.size
-    }
-
     override fun onBindViewHolder(holder: ViewHolderNowPlayingMovies, position: Int) {
-        val posData = differList.currentList[position]
+        val posData = getItem(position)
 
-        holder.apply {
-            Glide.with(imageViewEachNowPlayingMovie)
-                .load(MovieDBPathToImageLink.convertPathToImage(posData.backdrop_path))
-                .placeholder(R.drawable.ic_progress)
-                .into(imageViewEachNowPlayingMovie)
+        if (posData != null) {
+            holder.apply {
+                Glide.with(imageViewEachNowPlayingMovie)
+                    .load(MovieDBPathToImageLink.convertPathToImage(posData.backdrop_path))
+                    .placeholder(R.drawable.ic_progress)
+                    .into(imageViewEachNowPlayingMovie)
 
-            tvTitleBookEachNowPlayingMovie.text = posData.title
-            tvReleaseDateBookEachNowPlayingMovie.text =
-                this.itemView.context.getString(R.string.txt_release_date, posData.release_date)
+                tvTitleBookEachNowPlayingMovie.text = posData.title
+                tvReleaseDateBookEachNowPlayingMovie.text =
+                    this.itemView.context.getString(R.string.txt_release_date, posData.release_date)
 
-            // fetching whether the given movie is inside the bookmarks
-            // list and handling the button clicks according to that
-            setUpBookmarkButton(posData, holder.buttonBookmarkEachNowPlayingMovie)
+                // fetching whether the given movie is inside the bookmarks
+                // list and handling the button clicks according to that
+                setUpBookmarkButton(posData, holder.buttonBookmarkEachNowPlayingMovie)
 
-            buttonBookEachNowPlayingMovie.setOnClickListener {
-                exploreFragmentRVClickListener.moveToMovieDetailsActivity(
-                    posData.id,
-                    posData.title,
-                    exploreFragmentRVClickListener.getBookmarkedStatus(posData.id),
-                    posData.release_date,
-                    posData.backdrop_path
-                )
+                buttonBookEachNowPlayingMovie.setOnClickListener {
+                    exploreFragmentRVClickListener.moveToMovieDetailsActivity(
+                        posData.id,
+                        posData.title,
+                        exploreFragmentRVClickListener.getBookmarkedStatus(posData.id),
+                        posData.release_date,
+                        posData.backdrop_path
+                    )
+                }
             }
         }
     }
