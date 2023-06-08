@@ -6,9 +6,9 @@
 
 This is an Android application that fetches movie details from the MovieDB API and displays a list of now playing movies to the user. The user can also bookmark movies they are interested in. The app utilizes various Android libraries to enhance its functionality and provide a smooth user experience.
 
-### There are two releases of the application :- v1.0 and v1.1
-### v1.0 supports all the features except the pagination
-### v1.1 supports Pagination using Paging3 but disables sorting due to some certain reasons
+#### There are two releases of the application :- v1.0 and v1.1
+- v1.0 supports all the features except the pagination
+- v1.1 supports Pagination using Paging3 but disables sorting due to some certain reasons
 
 ## Figma UI
 
