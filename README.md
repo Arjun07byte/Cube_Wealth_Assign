@@ -1,6 +1,7 @@
 # Cube_Wealth_Assign
 
-![Cube Wealth Assign](https://github.com/Arjun07byte/Cube_Wealth_Assign/assets/91238510/677162bf-841c-48d3-8054-0f717bd3730a)
+![Cube Wealth Assign](https://github.com/Arjun07byte/Cube_Wealth_Assign/assets/91238510/0ab55d1a-f340-49a8-8f63-e95db9d2a84a)
+
 
 
 This is an Android application that fetches movie details from the MovieDB API and displays a list of now playing movies to the user. The user can also bookmark movies they are interested in. The app utilizes various Android libraries to enhance its functionality and provide a smooth user experience.
