@@ -86,4 +86,4 @@ For any inquiries or questions, please contact:
 
 Arjun Yadav\
 Email: ajyadav2002ay@gmail.com\
-LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/arjun--yadav/)
+LinkedIn: [Arjun Yadav](https://www.linkedin.com/in/arjun--yadav/)
