@@ -1,6 +1,7 @@
 # Cube_Wealth_Assign
 
-![MovieDB Logo]()
+![Cube Wealth Assign](https://github.com/Arjun07byte/Cube_Wealth_Assign/assets/91238510/677162bf-841c-48d3-8054-0f717bd3730a)
+
 
 This is an Android application that fetches movie details from the MovieDB API and displays a list of now playing movies to the user. The user can also bookmark movies they are interested in. The app utilizes various Android libraries to enhance its functionality and provide a smooth user experience.
 
@@ -18,12 +19,6 @@ Here is the link for the [Figma UI Design](https://www.figma.com/file/fZnTdtvrxa
 - Provides a bookmarked movies section for quick access to saved movies.
 - Provides detailed information about each movie cast, crew, production companies, reviews fetched from the MovieDB API.
 - Uses various Android libraries to enhance functionality and improve the user interface.
-
-## Screenshots
-
-| Now Playing Movies | Movie Details | Bookmarked Movies |
-| ----------------- | ------------- | ----------------- |
-| ![Now Playing](screenshots/now_playing.png) | ![Movie Details](screenshots/movie_details.png) | ![Bookmarked Movies](screenshots/bookmarked_movies.png) |
 
 ## Libraries Used
 
